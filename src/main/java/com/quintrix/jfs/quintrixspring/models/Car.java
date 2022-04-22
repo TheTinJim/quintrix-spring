@@ -1,6 +1,12 @@
 package com.quintrix.jfs.quintrixspring.models;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Car {
+
+  @Id
   Long id;
 
   String make;
