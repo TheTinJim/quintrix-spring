@@ -5,11 +5,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.quintrix.jfs.quintrixspring.models.Car;
 import com.quintrix.jfs.quintrixspring.models.ClientCar;
 import com.quintrix.jfs.quintrixspring.models.GetCarsResponse;
+import com.quintrix.jfs.quintrixspring.models.agent.Agent;
 import com.quintrix.jfs.quintrixspring.repository.CarRepository;
+import com.quintrix.jfs.quintrixspring.restservice.AgentService;
 
 @Service
 public class CarsServiceImpl implements CarsService {
@@ -17,7 +20,11 @@ public class CarsServiceImpl implements CarsService {
       Arrays.asList(new Car(1L, "Ford", "SUV", 2011), new Car(2L, "Honda", "SUV", 2005),
           new Car(3L, "Honda", "Sedan", 2012), new Car(4L, "Volvo", "Truck", 2015)));
 
+  @Autowired
   private CarRepository carRepository;
+
+  @Autowired
+  private AgentService agentService;
 
   @Override
   public GetCarsResponse getCarsList(String make) {
@@ -30,6 +37,10 @@ public class CarsServiceImpl implements CarsService {
       // getCarsResponse.setAvailableCarsList(carsList);
     // }
     getCarsResponse.setAvailableWarranty("2 Years Warranty");
+
+    List<Agent> agentsList = agentService.getAgentList();
+
+
     return getCarsResponse;
   }
 
