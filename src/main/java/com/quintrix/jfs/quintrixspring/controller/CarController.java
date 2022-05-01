@@ -1,6 +1,7 @@
 package com.quintrix.jfs.quintrixspring.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -58,6 +59,11 @@ public class CarController {
   @RequestMapping(method = RequestMethod.DELETE, value = "/cars/{id}")
   void deleteCar(@PathVariable("id") Long id) {
     carService.deleteCar(id);
+  }
+
+  @ExceptionHandler(Exception.class)
+  public void handleExceptions() {
+
   }
 }
 

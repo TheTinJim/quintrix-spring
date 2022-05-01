@@ -7,6 +7,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.quintrix.jfs.quintrixspring.exception.CarNotFoundException;
 import com.quintrix.jfs.quintrixspring.models.Car;
 import com.quintrix.jfs.quintrixspring.models.ClientCar;
 import com.quintrix.jfs.quintrixspring.models.GetCarsResponse;
@@ -87,7 +88,7 @@ public class CarsServiceImpl implements CarsService {
       Car thisCar = car.get();
       return new ClientCar(thisCar.getMake(), thisCar.getModel(), thisCar.getYear());
     } else {
-      return null;
+      throw new CarNotFoundException("Invalid Id", "Please use a different Id");
     }
   }
 }
