@@ -2,6 +2,9 @@ package com.quintrix.jfs.quintrixspring.models;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Car {
@@ -9,10 +12,14 @@ public class Car {
   @Id
   Long id;
 
+  @NotNull(message = "Make cannot be null")
   String make;
 
+  @NotNull(message = "Model cannot be null")
   String model;
 
+  @Min(value = 1908, message = "You cannot have a year before 1908")
+  @Max(value = 2023, message = "You cannot have a year after 2023")
   Integer year;
 
   public Car() {
