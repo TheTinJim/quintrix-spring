@@ -11,7 +11,6 @@ import com.quintrix.jfs.quintrixspring.exception.CarNotFoundException;
 import com.quintrix.jfs.quintrixspring.models.Car;
 import com.quintrix.jfs.quintrixspring.models.ClientCar;
 import com.quintrix.jfs.quintrixspring.models.GetCarsResponse;
-import com.quintrix.jfs.quintrixspring.models.agent.Agent;
 import com.quintrix.jfs.quintrixspring.repository.CarRepository;
 import com.quintrix.jfs.quintrixspring.restservice.AgentService;
 
@@ -34,12 +33,14 @@ public class CarsServiceImpl implements CarsService {
       getCarsResponse.setAvailableCarsList(carsList.stream().filter(c -> c.getMake().equals(make))
           .map(c -> new ClientCar(c.getMake(), c.getModel(), c.getYear()))
           .collect(Collectors.toList()));
-    } // else {
-      // getCarsResponse.setAvailableCarsList(carsList);
-    // }
+    } else {
+      getCarsResponse.setAvailableCarsList(
+          carsList.stream().map(c -> new ClientCar(c.getMake(), c.getModel(), c.getYear()))
+              .collect(Collectors.toList()));
+    }
     getCarsResponse.setAvailableWarranty("2 Years Warranty");
 
-    List<Agent> agentsList = agentService.getAgentList();
+    // List<Agent> agentsList = agentService.getAgentList();
 
 
     return getCarsResponse;
