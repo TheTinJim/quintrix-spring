@@ -13,3 +13,13 @@ spring:
             matching-strategy: ant_path_matcher
 agentService:
     getUrl: https://gorest.co.in/public/v2/users
+management:
+    endpoint:
+        health:
+            group:
+                custom:
+                    include=diskSpace,ping
+                    show-components=always
+                    show-details=always
+                status:
+                    http-mapping.up=207
